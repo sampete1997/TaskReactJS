@@ -8,7 +8,10 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
+import { useContext } from 'react';
 import { Line } from 'react-chartjs-2';
+import { FetctedApiContext } from '../ContextFetchedData';
+import { randomColors } from '../../FakeJson/fakeApi';
 
 
 ChartJS.register(
@@ -49,24 +52,10 @@ export const options = {
     maintainAspectRatio: false,
     responsive: true,
     plugins: {
-        title: {
-            display: true,
-            text: 'My Chart Title',
-            align: 'start',
-            position: 'top',
-            font: {
-                size: 16,
-                weight: 'bold',
-            },
-            padding: {
-                top: 10,
-                bottom: 10,
-            },
-        },
-
         legend: {
             position: "top",
             align: "end",
+            display: false,
             labels: {
                 usePointStyle: true,
                 boxWidth: 10,
@@ -82,28 +71,30 @@ export const options = {
 
 const labels = ['Week-1', 'Week-2', 'Week-3', 'Week-4',];
 
-export const data = {
-    labels,
-    datasets: [
-        {
-            label: 'Dataset 1',
-            data: [100, 145, 502, 320,],
-            borderColor: '#9BDD7C',
-            backgroundColor: '#9BDD7C',
-            tension: 0.3,
-            pointRadius: 0,
-        },
-        {
-            label: 'Dataset 2',
-            data: [140, 399, 235, 532],
-            borderColor: '#E9A0A0',
-            backgroundColor: '#E9A0A0',
-            tension: 0.3,
-            pointRadius: 0,
-        },
-    ],
+export const data = (fakeData) => {
+    return {
+        labels,
+        datasets: fakeData.map((ele, index) => {
+            return ({
+                label: ele.title,
+                data: fakeData.map(({ price, id }) => ele.price * (ele.price % price)  ),
+                borderColor: randomColors[index],
+                backgroundColor: randomColors[index], 
+                tension: 0.3,
+                pointRadius: 0,
+            })
+        }
+        ),
+    }
 };
 
-export function LineX() {
-    return <Line options={options} data={data} />;
+export function LineChart() {
+
+    const { fakeData } = useContext(FetctedApiContext)
+    console.log('fake', fakeData);
+    return (
+        <div className='h-[40vh]'>
+            <Line options={options} data={data(fakeData)} />
+        </div>
+    )
 }

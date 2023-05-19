@@ -1,10 +1,10 @@
-import React from "react";
 
 const BoardCards = (props) => {
+
     const { totalRevenues, totalTransactions, totalLikes, totalUsers } = props.metric
 
     return (
-        <div className=" flex justify-between flex-wrap my-5">
+        <div className=" flex justify-between flex-wrap mb-5">
 
             <div className="bg-[#DDEFE0] w-[250px] m-1 mt-2 p-4 border rounded-2xl">
                 <div className="my-1 flex justify-end ">
