@@ -54,10 +54,10 @@ const LoginPanel = () => {
       <div className="w-full p-8 lg:w-[50%] lg:p-4">
         <p className="text-[36px] font-[700]">Sign In</p>
         <p className="text-[16px] font-[400] mb-3">Sign in to your account</p>
-        <div className="flex justify-between mt-5 mb-3">
+        <div className="flex-col sm:flex-row flex justify-between items-center mt-5 mb-3">
           <div
             onClick={handleGoogleLogin}
-            className="flex text-center cursor-pointer text-[#858585] text-[12px] font-[400] px-6 py-1.5 bg-white border border-transparent rounded-xl"
+            className="my-4 flex text-center cursor-pointer text-[#858585] text-[12px] font-[400] px-6 py-1.5 sm:my-0 bg-white border border-transparent rounded-xl"
           >
             <img src="/search.png" className="h-5 w-5" alt="#" />
             <span className="ml-2">Sign in with Google</span>
